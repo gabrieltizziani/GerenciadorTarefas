@@ -19,9 +19,9 @@ public class TaskController {
     private TaskRepository taskRepository;
     @PostMapping("/")
     public ResponseEntity create (@RequestBody TaskModel taskModel, HttpServletRequest request){
-        System.out.println("chegou na controller" + request.getAttribute("idUser"));
-        UUID idUser = (UUID) request.getAttribute("idUser");
-        taskModel.setIdUser(idUser);
+
+        var idUser = request.getAttribute("idUser");
+        taskModel.setIdUser((UUID) idUser);
 
         var currentDate = LocalDateTime.now();
         if (currentDate.isAfter(taskModel.getStartAt()) || currentDate.isAfter(taskModel.getEndAt())  ){
